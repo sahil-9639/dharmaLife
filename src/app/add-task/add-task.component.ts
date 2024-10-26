@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { TaskService } from '../task-service.service';
+import { TaskService } from '../services/task-service.service';
 import { Task } from '../models/task.model';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,31 +14,38 @@ import { CommonModule } from '@angular/common'
   selector: 'app-add-task',
   standalone: true,
   imports: [
-    // BrowserModule,
     FormsModule,
-    // BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
     CommonModule,
-    // MatDatepickerModule,
-    // MatNativeDateModule,
   ],
 
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  task: Task = { id: 0, name: 'Sahil', description: 'Genius', dueDate: new Date() };
+  taskForm!: FormGroup;
 
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private router: Router, private fb: FormBuilder) {}
 
-
+  ngOnInit(): void {
+    this.taskForm = this.fb.group({
+      name: [''],
+      description: [''],
+      dueDate: ['', Validators.required]
+    });
+  }
   onSubmit(): void {
-    debugger
-    this.task.id = Math.floor(Math.random() * 1000);
-    this.taskService.addTask(this.task);
-    this.router.navigate(['/dashboard']);
+    if (this.taskForm.valid) {
+      const newTask: Task = {
+        id: Math.floor(Math.random() * 1000),
+        ...this.taskForm.value
+      };
+      debugger
+      this.taskService.addTask(newTask);
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

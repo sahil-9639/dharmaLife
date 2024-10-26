@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TaskFormComponent } from './task-form/task-form.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 export const routes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'task/add', component: TaskFormComponent },
-    { path: 'task/edit/:id', component: TaskFormComponent },
-    { path: 'add-task', component: AddTaskComponent },
-    // { path: 'login', component: LoginComponent },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'edit-task/:id', component: EditTaskComponent, canActivate: [AuthGuard] },
+    { path: 'add-task', component: AddTaskComponent, canActivate: [AuthGuard]  },
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
   ];

@@ -1,0 +1,25 @@
+/* src/app/components/login/login.component.css */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+    text-align: center; /* Center text */
+  }
+  
+  h2 {
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  mat-form-field {
+    width: 300px; /* Fixed width for form fields */
+    margin-bottom: 20px; /* Space between form fields */
+  }
+  
+  button {
+    width: 100%; /* Full width button */
+  }
+  

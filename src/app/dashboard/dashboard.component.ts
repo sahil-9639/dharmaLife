@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { TaskService } from '../task-service.service';
+import { TaskService } from '../services/task-service.service';
 import { Task } from '../models/task.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,24 +21,31 @@ export class DashboardComponent {
   displayedColumns: string[] = ['name', 'description', 'dueDate', 'actions'];
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private authService: AuthenticationService, private router: Router) {}
 
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(tasks => {
-      this.tasks = tasks;
-    });
+    this.loadTasks();
+  }
+  loadTasks(): void {
+    this.tasks = this.taskService.getTasks();
+    console.log('Loaded tasks:', this.tasks);
   }
 
   addTask (): void {
     this.router.navigate(['/add-task']);
   }
   editTask(task: Task): void {
-    alert(`Editing task: ${task.name}`);
+    // alert(`Editing task: ${task.id}`);
     console.log(task);
+    this.router.navigate(['/edit-task', task.id]);
+  }
+  logout(): void {
+    this.authService.logout();
   }
   
-  deleteTask(task: Task): void {
-    alert(`Deleting task: ${task.name}`);
+  deleteTask(delTask: Task): void {
+    alert(`Are you sure you want to delete task: ${delTask.name}`);
+    this.tasks = this.tasks.filter(task => task.id !== delTask.id);
   }
 }

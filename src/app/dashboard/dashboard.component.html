@@ -3,6 +3,8 @@
     <button mat-raised-button color="primary" (click)="addTask()">
       Add New Task Here
     </button>
+    <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
+
   </div>
   <div class="task-table">
     <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
