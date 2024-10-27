@@ -1,5 +1,6 @@
-<!-- src/app/components/edit-task/edit-task.component.html -->
-<h2>Edit Task</h2>
+<div class="edit-task-container">
+  <div class="transparent-div">
+  <h4>Edit Task</h4>
 <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
     <mat-label>Task Name</mat-label>
@@ -22,7 +23,9 @@
     </mat-error> -->
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">
+  <button class="edit-task" mat-raised-button color="primary" type="submit" [disabled]="editForm.invalid">
     Update Task
   </button>
 </form>
+</div>
+</div>

@@ -1,13 +1,17 @@
 <div class="dashboard-header">
     <h3>Task Dashboard</h3>
-    <button mat-raised-button color="primary" (click)="addTask()">
+    <button mat-raised-button class="add-task-button" color="primary" (click)="addTask()">
       Add New Task Here
     </button>
-    <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
+    <button mat-raised-button class="logout-button" color="secondary" (click)="logout()">Logout</button>
+    
 
   </div>
   <div class="task-table">
-    <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+    <div class="search-container">
+      <input type="text" placeholder="Search tasks" [(ngModel)]="searchTerm" (input)="filterTasks()" class="search-input" />
+    </div>
+    <table mat-table [dataSource]="filteredTasks" class="mat-elevation-z8">
   
       <!-- Task Name Column -->
       <ng-container matColumnDef="name">

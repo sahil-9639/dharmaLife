@@ -1,7 +1,8 @@
 <div class="login-container">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill">
+  <div class="transparent-div">
+    <h4>Login To Your Account</h4>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="login-field" appearance="fill">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" required />
       </mat-form-field>
@@ -11,6 +12,7 @@
         <input matInput type="password" formControlName="password" required />
       </mat-form-field>
   
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button class="login-button" color="primary" type="submit">Login</button>
     </form>
+  </div>
   </div>

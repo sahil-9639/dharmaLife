@@ -1,25 +1,66 @@
-/* src/app/components/login/login.component.css */
-
 .login-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    width: 100%; /* Full width */
-    text-align: center; /* Center text */
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url("../../assets/loginweb.jpg");
+    background-size: cover;
+ background-color: #cccccc;
   }
   
   h2 {
-    margin-bottom: 20px; /* Space below the title */
+    margin-bottom: 20px;
   }
   
   mat-form-field {
-    width: 300px; /* Fixed width for form fields */
-    margin-bottom: 20px; /* Space between form fields */
+    width: 100%;
+    margin-bottom: 20px;
   }
   
   button {
-    width: 100%; /* Full width button */
+    width: 100%;
   }
-  
+  .login-form {
+    width: 50%;
+    
+  }
+  .transparent-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 0;
+    border-radius: 50px;
+    width: 40%;
+    height: 70%;
+    border: 2px solid #fff;
+    background-color: #f0ffff78;
+  }
+  .mat-mdc-form-field-focus-overlay {
+    position: absolute;
+    opacity: inherit;
+    pointer-events: none;
+    background: #0080fb47 !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #0080fb47 !important;
+}
+.login-button {
+    background-color: #0080fb87 !important;
+    color: #fff !important;
+}
+@media screen and (max-width: 480px) {
+  .login-container {
+    background-image: url("../../assets/loginmobile.jpg");
+  }
+  .login-form {
+    width: 80%;
+  }
+  .transparent-div {
+    width: 80%;
+    height: 60%;
+  }
+}

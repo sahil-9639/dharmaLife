@@ -41,6 +41,16 @@ export class LoginComponent {
         alert('Invalid credentials');
       }
     }
+    else{
+      if(this.loginForm.get('username')?.errors?.['required']){
+        alert('Username is required');
+        return
+      }
+      if(this.loginForm.get('password')?.errors?.['required']){
+        alert('Password is required');
+        return
+      }
+    }
     // alert(this.loginForm.value.username +':'+ this.loginForm.value.password);
   }
 }

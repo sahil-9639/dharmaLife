@@ -1,4 +1,7 @@
-<h2>Add New Task</h2>
+<div class="add-task-container">
+  <div class="transparent-div">
+    <div class="loading-spinner">
+  <h4>Add New Task</h4>
 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
     <mat-label>Task Name</mat-label>
@@ -21,7 +24,10 @@
     </mat-error> -->
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
+  <button class="add-task" mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
     Add Task
   </button>
 </form>
+</div>
+</div>
+</div>

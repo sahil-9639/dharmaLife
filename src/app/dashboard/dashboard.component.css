@@ -5,16 +5,48 @@
   
   .mat-elevation-z8 {
     margin: 20px 0;
+    background: #F3F4F6;
   }
   .dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 35px;
+    width: 90%;
+    padding-left: 75px;
   }
-  
+  .add-task-button {
+    /* margin-left: 55%; */
+    color: #fff !important;
+
+    margin-left: 41%;
+    background-color: #0080fb87 !important;
+    width: auto;
+  }
+  .logout-button {
+    background-color: #ff00006b !important;
+    color: #fff !important;
+  }
   .task-table {
-    width: 100%;
+    width: 90%;
     overflow-x: auto;
+    padding-left: 75px;
+  }
+  .search-container {
+    margin-bottom: 15px;
   }
   
+  .search-input {
+    width: 20%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 78%;
+  }
+  tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row {
+    background: grey !important;
+}
+.mat-mdc-table tbody, .mat-mdc-table tfoot, .mat-mdc-table thead, .mat-mdc-cell, .mat-mdc-footer-cell, .mat-mdc-header-row, .mat-mdc-row, .mat-mdc-footer-row, .mat-mdc-table .mat-mdc-header-cell {
+  color: black;
+}

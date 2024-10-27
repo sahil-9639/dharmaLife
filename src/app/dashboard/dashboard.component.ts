@@ -7,12 +7,14 @@ import { Task } from '../models/task.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from '../services/authentication.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [MatTableModule,
     MatButtonModule,
+    FormsModule,
     MatIconModule,CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -20,6 +22,8 @@ import { AuthenticationService } from '../services/authentication.service';
 export class DashboardComponent {
   displayedColumns: string[] = ['name', 'description', 'dueDate', 'actions'];
   tasks: Task[] = [];
+  filteredTasks: Task[] = [];
+  searchTerm: string = '';
 
   constructor(private taskService: TaskService, private authService: AuthenticationService, private router: Router) {}
 
@@ -29,7 +33,8 @@ export class DashboardComponent {
   }
   loadTasks(): void {
     this.tasks = this.taskService.getTasks();
-    console.log('Loaded tasks:', this.tasks);
+    this.filteredTasks = [...this.tasks];
+    // console.log('Loaded tasks:', this.tasks);
   }
 
   addTask (): void {
@@ -43,9 +48,19 @@ export class DashboardComponent {
   logout(): void {
     this.authService.logout();
   }
-  
+  filterTasks() {
+    const searchLower = this.searchTerm.toLowerCase();
+    this.filteredTasks = this.tasks.filter(task =>
+      task.name.toLowerCase().includes(searchLower) ||
+      task.description.toLowerCase().includes(searchLower) ||
+      task.dueDate.includes(searchLower)
+    
+    );
+    // this.tasks = this.filteredTasks;
+    console.log('Filtered tasks:', this.filteredTasks);
+  }
   deleteTask(delTask: Task): void {
-    alert(`Are you sure you want to delete task: ${delTask.name}`);
-    this.tasks = this.tasks.filter(task => task.id !== delTask.id);
+    alert(`You are about to delete task: ${delTask.name}`);
+    this.filteredTasks = this.filteredTasks.filter(task => task.id !== delTask.id);
   }
 }
