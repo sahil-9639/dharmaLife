@@ -31,24 +31,24 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.loadTasks();
   }
-  loadTasks(): void {
+  loadTasks(): void { // load default tasks
     this.tasks = this.taskService.getTasks();
     this.filteredTasks = [...this.tasks];
     // console.log('Loaded tasks:', this.tasks);
   }
 
-  addTask (): void {
+  addTask (): void { // to navigate to add task page
     this.router.navigate(['/add-task']);
   }
-  editTask(task: Task): void {
+  editTask(task: Task): void { // to navigate to edit task page
     // alert(`Editing task: ${task.id}`);
-    console.log(task);
+    // console.log(task);
     this.router.navigate(['/edit-task', task.id]);
   }
-  logout(): void {
+  logout(): void { // to logout
     this.authService.logout();
   }
-  filterTasks() {
+  filterTasks() { // to filter tasks
     const searchLower = this.searchTerm.toLowerCase();
     this.filteredTasks = this.tasks.filter(task =>
       task.name.toLowerCase().includes(searchLower) ||
@@ -57,9 +57,9 @@ export class DashboardComponent {
     
     );
     // this.tasks = this.filteredTasks;
-    console.log('Filtered tasks:', this.filteredTasks);
+    // console.log('Filtered tasks:', this.filteredTasks);
   }
-  deleteTask(delTask: Task): void {
+  deleteTask(delTask: Task): void {// to delete task
     alert(`You are about to delete task: ${delTask.name}`);
     this.filteredTasks = this.filteredTasks.filter(task => task.id !== delTask.id);
   }

@@ -46,6 +46,14 @@ h2 {
     background-color: #0080fbcf !important;
     color: #fff !important;
   }
+  .back-button {
+    background-color: #003737d1 !important;
+    color: #fff !important;
+    margin-top: 5%;
+  }
+  mat-form-field {
+    margin-bottom: 15px !important;
+  }
   button:disabled {
     cursor: not-allowed;
     pointer-events: all !important;

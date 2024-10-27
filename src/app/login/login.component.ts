@@ -26,27 +26,27 @@ export class LoginComponent {
     private authService: AuthenticationService,
     private router: Router
   ) {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.fb.group({ // to load task form
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  onSubmit(): void {
+  onSubmit(): void { // to login and navigate to dashboard
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       if (this.authService.login(username, password)) {
         this.router.navigate(['/dashboard']);
-      } else {
+      } else { // handle case where login fails
         alert('Invalid credentials');
       }
     }
-    else{
-      if(this.loginForm.get('username')?.errors?.['required']){
+    else{ // handle case where form is invalid
+      if(this.loginForm.get('username')?.errors?.['required']){ // handle case where username is invalid
         alert('Username is required');
         return
       }
-      if(this.loginForm.get('password')?.errors?.['required']){
+      if(this.loginForm.get('password')?.errors?.['required']){ // handle case where password is invalid
         alert('Password is required');
         return
       }

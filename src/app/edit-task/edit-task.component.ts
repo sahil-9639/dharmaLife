@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'
+import { CommonModule, Location } from '@angular/common'
 import { MatButtonModule } from '@angular/material/button';
 import { Task } from '../models/task.model';
 
@@ -31,16 +31,17 @@ export class EditTaskComponent {
     private fb: FormBuilder,
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
-    this.editForm = this.fb.group({
+    this.editForm = this.fb.group({ // to load task form
       name: ['', Validators.required],
       description: [''],
       dueDate: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { // to load task form and patch values
     this.route.params.subscribe(params => {
       this.taskId = +params['id'];
       const task = this.taskService.getTaskById(this.taskId);
@@ -50,21 +51,23 @@ export class EditTaskComponent {
           description: task.description,
           dueDate: task.dueDate
         });
-      } else {
-        console.error('Task not found');
+      } else { // handle case where task not found
+        // console.error('Task not found');
         alert('Task not found');
         this.router.navigate(['/dashboard']);
       }
     });
   }
-
-  onSubmit(): void {
+  goBack(): void { // to go back
+    this.location.back();
+  }
+  onSubmit(): void { // to update task and navigate to dashboard
     if (this.editForm.valid) {
       const updatedTask: Task = {
         id: this.taskId,
         ...this.editForm.value
       };
-      console.log(updatedTask);
+      // console.log(updatedTask);
       this.taskService.updateTask(updatedTask);
       this.router.navigate(['/dashboard']); 
     }

@@ -13,7 +13,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
+    <textarea matInput id="autoTextarea" style="width: -webkit-fill-available; height: auto; max-height: 100px; overflow-y: auto;" rows="2" formControlName="description"></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -27,6 +27,7 @@
   <button class="add-task" mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">
     Add Task
   </button>
+  <button class="back-button" mat-raised-button color="secondary" (click)="goBack()">Back</button>
 </form>
 </div>
 </div>

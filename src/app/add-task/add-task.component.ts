@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'
+import { CommonModule, Location } from '@angular/common'
 
 @Component({
   selector: 'app-add-task',
@@ -28,24 +28,26 @@ import { CommonModule } from '@angular/common'
 export class AddTaskComponent {
   taskForm!: FormGroup;
 
-  constructor(private taskService: TaskService, private router: Router, private fb: FormBuilder) {}
+  constructor(private taskService: TaskService, private router: Router, private fb: FormBuilder, private location: Location) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { // to load task form
     this.taskForm = this.fb.group({
-      name: [''],
+      name: ['',Validators.required],
       description: [''],
       dueDate: ['', Validators.required]
     });
   }
-  onSubmit(): void {
+  onSubmit(): void { // to add task
     if (this.taskForm.valid) {
       const newTask: Task = {
         id: Math.floor(Math.random() * 1000),
         ...this.taskForm.value
       };
-      debugger
       this.taskService.addTask(newTask);
       this.router.navigate(['/dashboard']);
     }
+  }
+  goBack(): void { // to go back
+    this.location.back();
   }
 }
